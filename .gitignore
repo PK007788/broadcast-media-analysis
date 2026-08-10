@@ -1,0 +1,60 @@
+# Virtual Environment
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Models
+*.pt
+*.pth
+*.h5
+*.hdf5
+*.keras
+*.onnx
+*.weights
+
+# Datasets and Media
+data/
+dataset/
+news.coco/
+videos/
+app/temp/
+
+# Training Outputs
+runs/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# Logs
+*.log
