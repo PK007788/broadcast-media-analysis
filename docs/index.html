@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broadcast Media Analysis | Rectangular Text Overlay Detection</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="Real-Time Rectangular Text Overlay Detection in Broadcast Media using SSDLite320 with MobileNetV3-Large. Research project at IIT Patna.">
+  <meta name="keywords" content="Broadcast Media Analysis, Lower Thirds, Text Overlay Detection, SSDLite, MobileNetV3, Object Detection, PyTorch, IIT Patna">
+  <meta property="og:title" content="Broadcast Media Analysis: Rectangular Text Overlay Detection">
+  <meta property="og:description" content="Fine-tuned lightweight SSDLite320 with MobileNetV3-Large for real-time broadcast text overlay detection at 30+ FPS.">
+  <meta property="og:image" content="./assets/yt_thumbnail.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Outfit & Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- KaTeX for crisp LaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Mermaid.js for Dynamic Architecture Diagram -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <!-- Prism.js for Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand">
+        <div class="brand-icon">📺</div>
+        <span class="brand-text">BroadcastVision</span>
+        <span class="brand-badge">IIT&nbsp;Patna</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#overview" class="nav-link active">Overview</a></li>
+        <li><a href="#video-presentation" class="nav-link">Video & Thumbnail</a></li>
+        <li><a href="#architecture" class="nav-link">Architecture</a></li>
+        <li><a href="#mathematics" class="nav-link">Mathematical Logic</a></li>
+        <li><a href="#code-walkthrough" class="nav-link">Core Code</a></li>
+        <li><a href="#benchmarks" class="nav-link">Results</a></li>
+        <li><a href="#advisors" class="nav-link">Mentors & Advisor</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://github.com/PK007788/broadcast-media-analysis" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="overview" class="hero">
+    <div class="container">
+      <div class="hero-pill">
+        <span class="pulse-dot"></span>
+        <span>Computer Vision Research • Broadcast Media Automation</span>
+      </div>
+
+      <h1 class="hero-title">
+        Broadcast Media Analysis: <br>
+        <span class="gradient-text">Rectangular Text Overlay Detection</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        An ultra-lightweight, real-time deep learning pipeline based on <strong>SSDLite320 with MobileNetV3-Large</strong>. 
+        Designed to detect, localize, and bound critical text overlays, lower-thirds, headline banners, and ticker graphics on broadcast video streams at <strong>30+ FPS on CPU</strong>.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#video-presentation" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>Watch Presentation</span>
+        </a>
+        <a href="#architecture" class="btn btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="9" y1="21" x2="9" y2="9"></line>
+          </svg>
+          <span>Explore Architecture</span>
+        </a>
+        <a href="https://github.com/PK007788/broadcast-media-analysis" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <span>Explore Codebase</span>
+        </a>
+      </div>
+
+      <!-- Stats Ribbon -->
+      <div class="stats-ribbon">
+        <div class="stat-item">
+          <div class="stat-value">2.21M</div>
+          <div class="stat-label">Model Parameters</div>
+          <div class="stat-sub">Lightweight Footprint (8.7 MB)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">0.427</div>
+          <div class="stat-label">GFLOPs Compute</div>
+          <div class="stat-sub">Ultra-efficient MobileNetV3</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">30.6+</div>
+          <div class="stat-label">Inference FPS</div>
+          <div class="stat-sub">Real-Time CPU Execution (32ms)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">0.7477</div>
+          <div class="stat-label">Mean IoU</div>
+          <div class="stat-sub">Strict Bounding Box Overlap</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">96.88%</div>
+          <div class="stat-label">mAP @ 0.50</div>
+          <div class="stat-sub">Recall: 96.88% | Precision: 88.57%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VIDEO & THUMBNAIL SHOWCASE ==================== -->
+  <section id="video-presentation" class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Screen Recording & Walkthrough</div>
+        <h2 class="section-title">Video Presentation & Extracted Thumbnail</h2>
+        <p class="section-desc">
+          Watch the comprehensive project demonstration explaining the engineering motivation, mathematical loss formulation, anchor adaptation experiments, and Streamlit demo application.
+        </p>
+      </div>
+
+      <div class="media-grid">
+        <!-- Video Player Card -->
+        <div class="video-card">
+          <div class="video-player-wrapper">
+            <iframe 
+              src="https://www.youtube-nocookie.com/embed/3WrecZwehT8?rel=0&modestbranding=1" 
+              title="Broadcast Media Analysis Project Presentation" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-info">
+            <div class="video-header">
+              <h3 class="video-title">Comprehensive Project Walkthrough & Live Demo</h3>
+              <span class="badge-pill">YouTube HD • 1080p</span>
+            </div>
+            <p class="video-desc">
+              This recording details the entire lifecycle: scraping & annotating broadcast news frames in COCO format, training both the Baseline and Dataset-Adapted SSDLite models with PyTorch, analyzing the 0.7477 mIoU scores, and running inference through the FastAPI backend and Streamlit user interface.
+            </p>
+          </div>
+        </div>
+
+        <!-- Thumbnail & Key Highlights Card -->
+        <div class="thumbnail-card">
+          <div class="thumb-image-container">
+            <img 
+              src="./assets/yt_thumbnail.jpg" 
+              alt="YouTube Video High-Definition Thumbnail" 
+              class="thumb-image"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://img.youtube.com/vi/3WrecZwehT8/maxresdefault.jpg';"
+            >
+            <span class="thumb-badge">Extracted HD Thumbnail</span>
+          </div>
+
+          <div class="thumb-details">
+            <h4>Presentation Agenda & Topics Covered</h4>
+            <p>Direct video link: <a href="https://youtu.be/3WrecZwehT8?si=Vbp-OQABnsZ0MtXT" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: underline;">youtu.be/3WrecZwehT8</a></p>
+
+            <ul class="topic-list">
+              <li class="topic-item">
+                <div class="topic-icon">✓</div>
+                <span><strong>Problem Motivation:</strong> Automating lower-third and news ticker extraction.</span>
+              </li>
+              <li class="topic-item">
+                <div class="topic-icon">✓</div>
+                <span><strong>Architectural Selection:</strong> SSDLite320 + MobileNetV3-Large for edge deployment.</span>
+              </li>
+              <li class="topic-item">
+                <div class="topic-icon">✓</div>
+                <span><strong>Dataset-Adapted Anchors:</strong> Wide aspect ratios $[2, 3, 5, 8]$ vs default COCO anchors.</span>
+              </li>
+              <li class="topic-item">
+                <div class="topic-icon">✓</div>
+                <span><strong>Mathematical Formulations:</strong> Vectorized IoU, Smooth L1, and Multi-task loss.</span>
+              </li>
+              <li class="topic-item">
+                <div class="topic-icon">✓</div>
+                <span><strong>Streamlit & FastAPI:</strong> Full-stack interactive visual inference tool.</span>
+              </li>
+            </ul>
+
+            <div style="display: flex; gap: 12px; margin-top: 10px;">
+              <a href="https://youtu.be/3WrecZwehT8?si=Vbp-OQABnsZ0MtXT" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="flex: 1;">
+                Watch on YouTube
+              </a>
+              <a href="./assets/yt_thumbnail.jpg" target="_blank" class="btn btn-secondary btn-sm" download>
+                Download Thumbnail
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SYSTEM ARCHITECTURE ==================== -->
+  <section id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Pipeline Architecture</div>
+        <h2 class="section-title">End-to-End System Architecture</h2>
+        <p class="section-desc">
+          A high-throughput, low-latency pipeline designed for continuous real-time broadcast media frame analysis, multi-scale feature representation, and accurate spatial box localization.
+        </p>
+      </div>
+
+      <!-- Mermaid Diagram Card -->
+      <div class="arch-container">
+        <div class="arch-header">
+          <h3>Neural Network Pipeline & Service Topology</h3>
+          <span class="badge-pill" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border-color: rgba(99,102,241,0.3);">
+            Interactive Mermaid Diagram
+          </span>
+        </div>
+
+        <div class="arch-canvas">
+          <pre class="mermaid">
+flowchart LR
+    subgraph INP["1. Video Ingestion"]
+        V["Broadcast Video Stream / File"] --> F["Frame Extractor (cv2)"]
+        F --> R["Resize & Normalize (320x320)"]
+    end
+
+    subgraph BB["2. MobileNetV3-Large Backbone"]
+        R --> C1["Initial Conv2d + Hard-Swish"]
+        C1 --> IR["Inverted Residual Blocks + SE Attention"]
+        IR --> P1["Feature Map 1 (19x19)"]
+        IR --> P2["Feature Map 2 (10x10)"]
+        IR --> P3["Feature Map 3 (5x5)"]
+        IR --> P4["Feature Map 4 (3x3)"]
+        IR --> P5["Feature Map 5 (2x2)"]
+        IR --> P6["Feature Map 6 (1x1)"]
+    end
+
+    subgraph HD["3. SSDLite Detection Head"]
+        P1 & P2 & P3 & P4 & P5 & P6 --> DW["Depthwise-Separable Convolutions"]
+        DW --> CLS["Classification Head (2 Classes)"]
+        DW --> REG["Regression Head (4 Coordinates)"]
+    end
+
+    subgraph ANCH["4. Anchor Generation Strategy"]
+        CLS & REG --> M1["Model A: Default COCO Anchors [2, 3]"]
+        CLS & REG --> M2["Model B: Adapted Wide Anchors [2, 3, 5, 8]"]
+    end
+
+    subgraph PP["5. Post-Processing & NMS"]
+        M1 & M2 --> NMS["Non-Maximum Suppression (IoU >= 0.50)"]
+        NMS --> CLAMP["Boundary Clamping & Denormalization"]
+    end
+
+    subgraph APP["6. Deployment Layer"]
+        CLAMP --> FAST["FastAPI Inference Server (Port 5000)"]
+        FAST --> ST["Streamlit UI (Port 8501)"]
+    end
+
+    style INP fill:#111827,stroke:#6366f1,stroke-width:1.5px,color:#fff
+    style BB fill:#0f172a,stroke:#8b5cf6,stroke-width:1.5px,color:#fff
+    style HD fill:#111827,stroke:#06b6d4,stroke-width:1.5px,color:#fff
+    style ANCH fill:#0f172a,stroke:#ec4899,stroke-width:1.5px,color:#fff
+    style PP fill:#111827,stroke:#10b981,stroke-width:1.5px,color:#fff
+    style APP fill:#0f172a,stroke:#f59e0b,stroke-width:1.5px,color:#fff
+          </pre>
+        </div>
+
+        <!-- Architectural Key Takeaways Grid -->
+        <div class="arch-grid">
+          <div class="arch-step-card">
+            <div class="step-num">Component 01</div>
+            <h4 class="step-title">MobileNetV3-Large</h4>
+            <p class="step-desc">
+              Leverages inverted residual bottlenecks, Hard-Swish non-linearities, and Squeeze-and-Excitation (SE) attention to extract deep semantic features with minimal floating-point operations (0.427 GFLOPs).
+            </p>
+          </div>
+
+          <div class="arch-step-card">
+            <div class="step-num">Component 02</div>
+            <h4 class="step-title">Multi-Scale SSDLite Head</h4>
+            <p class="step-desc">
+              Replaces standard $3\times3$ convolutions with depthwise separable layers, drastically shrinking parameters to 2.21M while detecting rectangular overlays across 6 pyramid scales ($19\times19$ to $1\times1$).
+            </p>
+          </div>
+
+          <div class="arch-step-card">
+            <div class="step-num">Component 03</div>
+            <h4 class="step-title">Custom Aspect Ratios</h4>
+            <p class="step-desc">
+              Because broadcast news banners and tickers are predominantly wide rectangles, Model B adapts anchor aspect ratios to $[2, 3, 5, 8]$ across all 6 pyramid layers to optimize prior spatial coverage.
+            </p>
+          </div>
+
+          <div class="arch-step-card">
+            <div class="step-num">Component 04</div>
+            <h4 class="step-title">Decoupled Web App</h4>
+            <p class="step-desc">
+              A high-concurrency FastAPI microservice serves PyTorch inference endpoints, paired with an interactive Streamlit frontend for drag-and-drop video/frame overlay detection and IoU analysis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MATHEMATICAL LOGIC & FORMULATIONS ==================== -->
+  <section id="mathematics" class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Theoretical Foundations</div>
+        <h2 class="section-title">Mathematical Formulations & Loss Logic</h2>
+        <p class="section-desc">
+          Exact mathematical specifications governing bounding box regression, multi-task training loss, anchor box parameterization, and spatial overlap metrics.
+        </p>
+      </div>
+
+      <div class="math-grid">
+        <!-- Card 1: IoU -->
+        <div class="math-card">
+          <h3 class="math-title">1. Intersection over Union (IoU)</h3>
+          <div class="math-subtitle">Spatial Alignment Metric & NMS Criterion</div>
+          <div class="equation-box">
+            $$\text{IoU}(B_{\text{pred}}, B_{\text{gt}}) = \frac{\text{Area}(B_{\text{pred}} \cap B_{\text{gt}})}{\text{Area}(B_{\text{pred}} \cup B_{\text{gt}})} = \frac{|x_2^* - x_1^*| \cdot |y_2^* - y_1^*|}{A_1 + A_2 - (x_2^* - x_1^*)(y_2^* - y_1^*)}$$
+          </div>
+          <p class="math-explanation">
+            Computes the ratio of overlap between predicted bounding box $B_{\text{pred}} = (x_1^p, y_1^p, x_2^p, y_2^p)$ and ground-truth box $B_{\text{gt}} = (x_1^g, y_1^g, x_2^g, y_2^g)$, where intersection coordinates are given by:
+          </p>
+          <div class="math-variables">
+            $$x_1^* = \max(x_1^p, x_1^g), \quad y_1^* = \max(y_1^p, y_1^g), \quad x_2^* = \min(x_2^p, x_2^g), \quad y_2^* = \min(y_2^p, y_2^g)$$
+          </div>
+        </div>
+
+        <!-- Card 2: Multi-Task Objective Loss -->
+        <div class="math-card">
+          <h3 class="math-title">2. Multi-Task Objective Function</h3>
+          <div class="math-subtitle">Weighted Classification & Localization Loss</div>
+          <div class="equation-box">
+            $$\mathcal{L}(x, c, l, g) = \frac{1}{N} \left( \mathcal{L}_{\text{conf}}(x, c) + \alpha \mathcal{L}_{\text{loc}}(x, l, g) \right)$$
+          </div>
+          <p class="math-explanation">
+            $N$ is the number of matched default boxes. If $N=0$, loss is set to 0. The weighting factor is set to $\alpha = 1$. The classification term $\mathcal{L}_{\text{conf}}$ utilizes Cross-Entropy over positive and hard-mined negative anchors (3:1 ratio):
+          </p>
+          <div class="math-variables">
+            $$\mathcal{L}_{\text{conf}}(x, c) = -\sum_{i \in \text{Pos}}^{N} x_{ij}^p \log(\hat{c}_i^p) - \sum_{i \in \text{Neg}} \log(\hat{c}_i^0) \quad \text{where } \hat{c}_i^p = \frac{\exp(c_i^p)}{\sum_k \exp(c_i^k)}$$
+          </div>
+        </div>
+
+        <!-- Card 3: Smooth L1 Regression -->
+        <div class="math-card">
+          <h3 class="math-title">3. Smooth L1 Bounding Box Loss</h3>
+          <div class="math-subtitle">Robust Localization Gradient Flow</div>
+          <div class="equation-box">
+            $$\mathcal{L}_{\text{loc}}(x, l, g) = \sum_{i \in \text{Pos}}^{N} \sum_{m \in \{cx, cy, w, h\}} x_{ij}^k \cdot \text{smooth}_{L1}(l_i^m - \hat{g}_j^m)$$
+          </div>
+          <p class="math-explanation">
+            Mitigates exploding gradients on large coordinate discrepancies during initial training epochs:
+          </p>
+          <div class="math-variables">
+            $$\text{smooth}_{L1}(u) = \begin{cases} 0.5 u^2 & \text{if } |u| < 1 \\ |u| - 0.5 & \text{otherwise} \end{cases}$$
+          </div>
+        </div>
+
+        <!-- Card 4: Anchor Aspect Ratio Formulations -->
+        <div class="math-card">
+          <h3 class="math-title">4. Anchor Box Parameterization</h3>
+          <div class="math-subtitle">Custom Wide Aspect Ratios for Broadcast Overlays</div>
+          <div class="equation-box">
+            $$w_k^a = s_k \sqrt{a_r}, \quad h_k^a = \frac{s_k}{\sqrt{a_r}}, \quad a_r \in \{2, 3, 5, 8\}$$
+          </div>
+          <p class="math-explanation">
+            For each feature map scale $k \in \{1, \dots, 6\}$, default anchor scale is governed by:
+          </p>
+          <div class="math-variables">
+            $$s_k = s_{\min} + \frac{s_{\max} - s_{\min}}{m - 1}(k - 1), \quad s_{\min} = 0.20, \; s_{\max} = 0.95$$
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORE CODE WALKTHROUGH ==================== -->
+  <section id="code-walkthrough">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Implementation Highlights</div>
+        <h2 class="section-title">Core Code & Algorithmic Logic</h2>
+        <p class="section-desc">
+          Inspect key functional modules implemented in PyTorch, TorchVision, and Streamlit—from vectorized IoU calculation to dataset-adapted anchor generation.
+        </p>
+      </div>
+
+      <div class="code-container">
+        <div class="code-tabs-bar">
+          <div class="tab-nav">
+            <button class="tab-btn active" data-target="tab-iou">Vectorized IoU</button>
+            <button class="tab-btn" data-target="tab-anchors">Adapted Anchors</button>
+            <button class="tab-btn" data-target="tab-head">SSDLite Head</button>
+            <button class="tab-btn" data-target="tab-split">Temporal Splitting</button>
+            <button class="tab-btn" data-target="tab-fastapi">FastAPI Service</button>
+          </div>
+          <div class="code-actions">
+            <button class="copy-btn" id="copy-code-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy Code</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="code-content">
+          <!-- TAB 1: Vectorized IoU -->
+          <div class="tab-pane active" id="tab-iou">
+            <pre><code class="language-python">def compute_iou(box1: torch.Tensor, box2: torch.Tensor) -> torch.Tensor:
+    """
+    Vectorized Intersection over Union (IoU) computation between two sets of bounding boxes.
+    
+    Args:
+        box1: Tensor of shape (N, 4) in [x1, y1, x2, y2] format
+        box2: Tensor of shape (M, 4) in [x1, y1, x2, y2] format
+        
+    Returns:
+        Tensor of shape (N, M) containing pairwise IoU values in range [0.0, 1.0]
+    """
+    # Compute intersection rectangle boundaries via broadcasting
+    x1 = torch.max(box1[:, None, 0], box2[None, :, 0])
+    y1 = torch.max(box1[:, None, 1], box2[None, :, 1])
+    x2 = torch.min(box1[:, None, 2], box2[None, :, 2])
+    y2 = torch.min(box1[:, None, 3], box2[None, :, 3])
+
+    # Compute intersection area (clamped at 0 to avoid negative overlaps)
+    inter = (x2 - x1).clamp(min=0) * (y2 - y1).clamp(min=0)
+
+    # Compute individual bounding box areas
+    area1 = (box1[:, 2] - box1[:, 0]) * (box1[:, 3] - box1[:, 1])
+    area2 = (box2[:, 2] - box2[:, 0]) * (box2[:, 3] - box2[:, 1])
+
+    # Compute union: Area(A) + Area(B) - Intersection(A, B)
+    union = area1[:, None] + area2[None, :] - inter
+
+    # Avoid zero division with epsilon 1e-6
+    return inter / (union + 1e-6)</code></pre>
+          </div>
+
+          <!-- TAB 2: Adapted Anchors -->
+          <div class="tab-pane" id="tab-anchors">
+            <pre><code class="language-python">from torchvision.models.detection.anchor_utils import DefaultBoxGenerator
+
+# In news broadcasts, textual overlays and lower-thirds are predominantly
+# elongated horizontal rectangles spanning 50% to 95% of the screen width.
+# We modify default square-heavy anchors with wide aspect ratios [2, 3, 5, 8].
+
+custom_anchor_gen = DefaultBoxGenerator(
+    aspect_ratios=[[2, 3, 5, 8]] * 6,  # Applied across all 6 feature pyramid scales
+    min_ratio=20,                      # Smallest scale covers 20% of image height
+    max_ratio=95                       # Largest scale covers 95% of image width
+)
+
+# Attach generator to SSDLite320 model
+model_adapted.anchor_generator = custom_anchor_gen
+num_anchors = custom_anchor_gen.num_anchors_per_location()
+print(f"Generated anchors per location across 6 layers: {num_anchors}")</code></pre>
+          </div>
+
+          <!-- TAB 3: SSDLite Head -->
+          <div class="tab-pane" id="tab-head">
+            <pre><code class="language-python">from functools import partial
+import torch.nn as nn
+from torchvision.models.detection import ssdlite320_mobilenet_v3_large
+from torchvision.models.detection.ssdlite import SSDLiteHead
+
+def create_adapted_ssdlite(num_classes: int = 2):
+    """
+    Initializes SSDLite320 with MobileNetV3-Large and adapts the prediction
+    head channels to match custom anchor configurations.
+    """
+    model = ssdlite320_mobilenet_v3_large(num_classes=num_classes, weights=None)
+    
+    # Extract input channel depths from classification head module list
+    in_channels = [c[0][0].in_channels for c in model.head.classification_head.module_list]
+    norm_layer = partial(nn.BatchNorm2d, eps=0.001, momentum=0.03)
+
+    # Re-instantiate SSDLiteHead with custom number of anchors (10 per cell)
+    model.head = SSDLiteHead(
+        in_channels=in_channels,
+        num_anchors=custom_anchor_gen.num_anchors_per_location(),
+        num_classes=num_classes,
+        norm_layer=norm_layer
+    )
+    return model</code></pre>
+          </div>
+
+          <!-- TAB 4: Temporal Splitting -->
+          <div class="tab-pane" id="tab-split">
+            <pre><code class="language-python"># Temporal-grouped splitting prevents adjacent video frames from leaking
+# across train, validation, and test splits.
+frame_numbers = []
+for img in coco["images"]:
+    match = re.search(r"frame_(\d+)", img["file_name"])
+    if match:
+        frame_numbers.append((int(match.group(1)), img))
+
+frame_numbers.sort(key=lambda x: x[0])
+groups = []
+if frame_numbers:
+    current_group = [frame_numbers[0]]
+    for i in range(1, len(frame_numbers)):
+        prev_num = frame_numbers[i-1][0]
+        curr_num = frame_numbers[i][0]
+        if curr_num - prev_num > 5:
+            groups.append(current_group)
+            current_group = [frame_numbers[i]]
+        else:
+            current_group.append(frame_numbers[i])
+    groups.append(current_group)
+
+# Splits: Train: Groups 0-28 (202 imgs), Val: Groups 29-33 (36 imgs), Test: Groups 34-40 (21 imgs)</code></pre>
+          </div>
+
+          <!-- TAB 5: FastAPI Service -->
+          <div class="tab-pane" id="tab-fastapi">
+            <pre><code class="language-python">from fastapi import FastAPI, UploadFile, File
+import torch
+from PIL import Image
+import io
+
+app = FastAPI(title="Broadcast Overlay Detection API")
+
+@app.post("/predict")
+async def predict_frame(file: UploadFile = File(...), conf_threshold: float = 0.3):
+    contents = await file.read()
+    image = Image.open(io.BytesIO(contents)).convert("RGB")
+    tensor = transform(image).unsqueeze(0).to(device)
+    
+    with torch.no_grad():
+        predictions = model(tensor)[0]
+    
+    # Filter by confidence threshold and text overlay label (class 1)
+    mask = (predictions["scores"] >= conf_threshold) & (predictions["labels"] == 1)
+    return {
+        "boxes": predictions["boxes"][mask].tolist(),
+        "scores": predictions["scores"][mask].tolist()
+    }</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BENCHMARKS & TEST GALLERY ==================== -->
+  <section id="benchmarks" class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Quantitative & Qualitative Analysis</div>
+        <h2 class="section-title">Model Evaluation & Prediction Gallery</h2>
+        <p class="section-desc">
+          Detailed metrics evaluated on held-out test frames using strict temporal grouping to prevent data leakage.
+        </p>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="benchmark-table-wrapper">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Evaluation Metric</th>
+              <th>Model A (Baseline SSDLite320)</th>
+              <th>Model B (Dataset-Adapted Wide Anchors)</th>
+              <th>Advantage / Observation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Mean IoU (mIoU)</strong></td>
+              <td><span class="badge-best">0.7477 (74.77%)</span></td>
+              <td>0.6899 (68.99%)</td>
+              <td>Baseline achieves superior tight bounding overlap</td>
+            </tr>
+            <tr>
+              <td><strong>Precision</strong></td>
+              <td><span class="badge-best">0.8857 (88.57%)</span></td>
+              <td>0.2647 (26.47%)</td>
+              <td>Baseline prevents false-positive hallucinations</td>
+            </tr>
+            <tr>
+              <td><strong>Recall</strong></td>
+              <td><span class="badge-best">0.9688 (96.88%)</span></td>
+              <td>0.2812 (28.12%)</td>
+              <td>Baseline catches 31 out of 32 test overlays</td>
+            </tr>
+            <tr>
+              <td><strong>F1-Score</strong></td>
+              <td><span class="badge-best">0.9254</span></td>
+              <td>0.2727</td>
+              <td>High harmonic mean between precision and recall</td>
+            </tr>
+            <tr>
+              <td><strong>mAP @ 0.50</strong></td>
+              <td><span class="badge-best">0.9688</span></td>
+              <td>0.2812</td>
+              <td>Outstanding localization at 0.50 threshold</td>
+            </tr>
+            <tr>
+              <td><strong>mAP @ 0.50:0.95</strong></td>
+              <td><span class="badge-best">0.5104</span></td>
+              <td>0.1061</td>
+              <td>Consistent performance under strict thresholds</td>
+            </tr>
+            <tr>
+              <td><strong>Compute Complexity</strong></td>
+              <td><span class="badge-best">0.427 GFLOPs</span></td>
+              <td>0.435 GFLOPs</td>
+              <td>Sub-0.5 GFLOP footprint enables mobile/CPU inference</td>
+            </tr>
+            <tr>
+              <td><strong>Inference Speed (FPS)</strong></td>
+              <td>30.6 FPS (32.69 ms)</td>
+              <td><span class="badge-best">34.5 FPS (29.00 ms)</span></td>
+              <td>Both models achieve full real-time 30+ FPS speed</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Interactive IoU Simulator Widget -->
+      <div class="arch-container" style="padding: 24px 32px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <h4 style="font-size: 1.15rem; margin-bottom: 4px; color: var(--text-white);">Interactive IoU Threshold Simulator</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Simulate Intersection-over-Union threshold requirements for broadcast overlay localization.</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <input type="range" id="iou-slider" min="10" max="95" value="75" style="accent-color: var(--accent-primary); width: 180px;">
+            <span id="iou-val" style="font-family: var(--font-mono); font-weight: 700; font-size: 1.25rem; color: var(--accent-cyan); width: 50px;">0.75</span>
+          </div>
+        </div>
+        <div id="iou-status" style="margin-top: 12px; font-size: 0.9rem; font-weight: 500; color: #34d399;">
+          Excellent Match (Model A Baseline average is ~0.75)
+        </div>
+      </div>
+
+      <!-- Qualitative Gallery -->
+      <h3 style="font-size: 1.5rem; margin: 40px 0 16px 0; text-align: center;">Qualitative Model Detections on Real Test Frames</h3>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 24px;">Actual bounding box predictions (Green: Ground Truth, Red/Orange: Predicted Model Overlays)</p>
+      
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="./assets/predictions/pred_img0009.png" alt="Prediction Frame 0009" loading="lazy">
+          <div class="gallery-card-info">
+            <h4 class="gallery-card-title">Test Sample #0009</h4>
+            <div class="gallery-card-meta">Headline & Lower-Third Bounded • High Confidence</div>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="./assets/predictions/pred_img0030.png" alt="Prediction Frame 0030" loading="lazy">
+          <div class="gallery-card-info">
+            <h4 class="gallery-card-title">Test Sample #0030</h4>
+            <div class="gallery-card-meta">Multi-box Ticker Localization • Full Screen Width</div>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="./assets/predictions/pred_img0098.png" alt="Prediction Frame 0098" loading="lazy">
+          <div class="gallery-card-info">
+            <h4 class="gallery-card-title">Test Sample #0098</h4>
+            <div class="gallery-card-meta">Complex Graphics & Dynamic Studio Backdrop</div>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="./assets/predictions/pred_img0116.png" alt="Prediction Frame 0116" loading="lazy">
+          <div class="gallery-card-info">
+            <h4 class="gallery-card-title">Test Sample #0116</h4>
+            <div class="gallery-card-meta">Clean Bounding Alignment • Zero Aspect Distortion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MENTORS & ADVISOR (BONUS TAKE) ==================== -->
+  <section id="advisors">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Academic Supervision</div>
+        <h2 class="section-title">Mentors & Faculty Advisor</h2>
+        <p class="section-desc">
+          Heartfelt gratitude to our esteemed mentors and faculty advisor for their invaluable guidance, academic rigor, and technical domain insights throughout this research project.
+        </p>
+      </div>
+
+      <div class="credits-grid">
+        <!-- Mentor 1 -->
+        <div class="credit-card">
+          <div class="credit-role-badge">Project Mentor</div>
+          <h3 class="credit-name">Parth Dhola Sir</h3>
+          <div class="credit-title">Research Mentor & Deep Learning Advisor</div>
+          <div class="credit-org">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span>IIT Patna Vision & Media Lab</span>
+          </div>
+          <p class="credit-desc">
+            Guided the experimental design for anchor box adaptation, dataset preprocessing pipelines, and evaluation metrics with intersection-over-union matching.
+          </p>
+        </div>
+
+        <!-- Mentor 2 -->
+        <div class="credit-card">
+          <div class="credit-role-badge">Project Mentor</div>
+          <h3 class="credit-name">Amaan Irfan Sir</h3>
+          <div class="credit-title">Research Mentor & Deep Learning Advisor</div>
+          <div class="credit-org">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span>IIT Patna Vision & Media Lab</span>
+          </div>
+          <p class="credit-desc">
+            Mentored on model training optimization, temporal split validation, and packaging the inference pipeline into an interactive web interface with FastAPI and Streamlit.
+          </p>
+        </div>
+
+        <!-- Faculty Advisor -->
+        <div class="credit-card credit-card-advisor">
+          <div class="credit-role-badge" style="background: rgba(245, 158, 11, 0.15); color: #fcd34d; border-color: rgba(245, 158, 11, 0.35);">Faculty Advisor</div>
+          <h3 class="credit-name">Prof. Prithwijit Guha</h3>
+          <div class="credit-title">Associate Professor, Department of Electrical Engineering</div>
+          <div class="credit-org">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+            <span>Indian Institute of Technology Patna (IIT Patna)</span>
+          </div>
+          <p class="credit-desc">
+            Provided foundational direction in visual scene analysis, video processing constraints, mathematical formulations of loss functions, and architectural trade-offs for real-time edge computing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== QUICKSTART & REPRODUCIBILITY ==================== -->
+  <section id="quickstart" class="section-alt">
+    <div class="container">
+      <div class="quickstart-card">
+        <h3 style="font-size: 1.6rem; margin-bottom: 8px;">Reproducibility & Getting Started</h3>
+        <p style="color: var(--text-muted); margin-bottom: 24px;">Run the model training or start the interactive application in under two minutes.</p>
+
+        <div class="quickstart-steps">
+          <div class="qs-step">
+            <div class="qs-step-title">
+              <span>1. Clone Repository & Install</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Install PyTorch and project dependencies</p>
+            <div class="qs-code-box">git clone https://github.com/PK007788/broadcast-media-analysis.git<br>cd broadcast-media-analysis<br>pip install -r requirements.txt</div>
+          </div>
+
+          <div class="qs-step">
+            <div class="qs-step-title">
+              <span>2. Train Baseline & Measure IoU</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Train Model A and evaluate test split mIoU</p>
+            <div class="qs-code-box">python train_baseline.py<br>python calculate_iou.py</div>
+          </div>
+
+          <div class="qs-step">
+            <div class="qs-step-title">
+              <span>3. Launch Demo Web Application</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Start FastAPI backend & Streamlit UI</p>
+            <div class="qs-code-box">python app/backend/app.py<br>streamlit run app/frontend/streamlit_app.py</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="brand" style="margin-bottom: 8px;">
+            <div class="brand-icon">📺</div>
+            <span>Broadcast Media Analysis</span>
+          </div>
+          <p>
+            Real-Time Rectangular Text Overlay Detection using Lightweight SSDLite320 with MobileNetV3-Large. Conducted at IIT Patna.
+          </p>
+        </div>
+
+        <ul class="footer-links">
+          <li><a href="https://github.com/PK007788/broadcast-media-analysis" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+          <li><a href="https://youtu.be/3WrecZwehT8?si=Vbp-OQABnsZ0MtXT" target="_blank" rel="noopener noreferrer">YouTube Presentation</a></li>
+          <li><a href="#overview">Back to Top ↑</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Broadcast Media Analysis Project • Indian Institute of Technology Patna (IIT Patna). Open Source under MIT License.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom Javascript Logic -->
+  <script src="./script.js"></script>
+</body>
+</html>
