@@ -367,7 +367,8 @@ flowchart LR
             $N$ is the number of matched default boxes. If $N=0$, loss is set to 0. The weighting factor is set to $\alpha = 1$. The classification term $\mathcal{L}_{\text{conf}}$ utilizes Cross-Entropy over positive and hard-mined negative anchors (3:1 ratio):
           </p>
           <div class="math-variables">
-            $$\mathcal{L}_{\text{conf}}(x, c) = -\sum_{i \in \text{Pos}}^{N} x_{ij}^p \log(\hat{c}_i^p) - \sum_{i \in \text{Neg}} \log(\hat{c}_i^0) \quad \text{where } \hat{c}_i^p = \frac{\exp(c_i^p)}{\sum_k \exp(c_i^k)}$$
+            $$\mathcal{L}_{\text{conf}}(x, c) = -\sum_{i \in \text{Pos}}^{N} x_{ij}^p \log(\hat{c}_i^p) - \sum_{i \in \text{Neg}} \log(\hat{c}_i^0)$$
+            $$\text{Softmax probabilities: } \hat{c}_i^p = \frac{\exp(c_i^p)}{\sum_k \exp(c_i^k)}$$
           </div>
         </div>
 
@@ -715,10 +716,10 @@ async def predict_frame(file: UploadFile = File(...), conf_threshold: float = 0.
       </div>
 
       <div class="credits-grid">
-        <!-- Mentor 1 -->
-        <div class="credit-card">
-          <div class="credit-role-badge">Project Mentor</div>
-          <h3 class="credit-name">Parth Dhola Sir</h3>
+        <!-- Faculty Advisor -->
+        <div class="credit-card credit-card-advisor">
+          <div class="credit-role-badge" style="background: rgba(245, 158, 11, 0.15); color: #fcd34d; border-color: rgba(245, 158, 11, 0.35);">Faculty Advisor</div>
+          <h3 class="credit-name">Prof. Prithwijit Guha</h3>
           <div class="credit-org">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
@@ -728,7 +729,7 @@ async def predict_frame(file: UploadFile = File(...), conf_threshold: float = 0.
           </div>
         </div>
 
-        <!-- Mentor 2 -->
+        <!-- Mentor 1 -->
         <div class="credit-card">
           <div class="credit-role-badge">Project Mentor</div>
           <h3 class="credit-name">Amaan Irfan Sir</h3>
@@ -741,10 +742,10 @@ async def predict_frame(file: UploadFile = File(...), conf_threshold: float = 0.
           </div>
         </div>
 
-        <!-- Faculty Advisor -->
-        <div class="credit-card credit-card-advisor">
-          <div class="credit-role-badge" style="background: rgba(245, 158, 11, 0.15); color: #fcd34d; border-color: rgba(245, 158, 11, 0.35);">Faculty Advisor</div>
-          <h3 class="credit-name">Prof. Prithwijit Guha</h3>
+        <!-- Mentor 2 -->
+        <div class="credit-card">
+          <div class="credit-role-badge">Project Mentor</div>
+          <h3 class="credit-name">Parth Dhola Sir</h3>
           <div class="credit-org">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>

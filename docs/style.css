@@ -698,64 +698,75 @@ section {
    MATHEMATICAL EQUATIONS SECTION
    ============================================================ */
 .math-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .math-card {
   background: var(--bg-card);
   border: 1px solid var(--border-glass);
-  border-radius: var(--radius-lg);
-  padding: 28px;
+  border-radius: var(--radius-xl);
+  padding: 32px 36px;
   box-shadow: var(--shadow-sm);
   transition: var(--transition-normal);
   position: relative;
+  width: 100%;
 }
 
 .math-card:hover {
   border-color: var(--border-glow);
   box-shadow: var(--shadow-glow);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .math-title {
-  font-size: 1.2rem;
-  margin-bottom: 6px;
+  font-size: 1.3rem;
+  margin-bottom: 4px;
   display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--text-white);
 }
 
 .math-subtitle {
   font-size: 0.85rem;
-  color: var(--accent-primary);
-  margin-bottom: 18px;
+  color: var(--accent-cyan);
+  margin-bottom: 14px;
   font-weight: 500;
 }
 
 .equation-box {
-  background: rgba(11, 15, 25, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(11, 15, 25, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
-  padding: 18px;
-  margin-bottom: 18px;
+  padding: 22px 24px;
+  margin: 16px 0;
   overflow-x: auto;
   text-align: center;
+  font-size: 1.06rem;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.equation-box .katex-display {
+  margin: 0;
 }
 
 .math-explanation {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .math-variables {
   margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  font-size: 0.82rem;
-  color: var(--text-subtle);
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  overflow-x: auto;
 }
 
 .math-variables span {
