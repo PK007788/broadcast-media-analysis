@@ -346,7 +346,7 @@ flowchart LR
           <h3 class="math-title">1. Intersection over Union (IoU)</h3>
           <div class="math-subtitle">Spatial Alignment Metric & NMS Criterion</div>
           <div class="equation-box">
-            $$\text{IoU}(B_{\text{pred}}, B_{\text{gt}}) = \frac{\text{Area}(B_{\text{pred}} \cap B_{\text{gt}})}{\text{Area}(B_{\text{pred}} \cup B_{\text{gt}})} = \frac{|x_2^* - x_1^*| \cdot |y_2^* - y_1^*|}{A_1 + A_2 - (x_2^* - x_1^*)(y_2^* - y_1^*)}$$
+            $$\text{IoU}(B_{\text{pred}}, B_{\text{gt}}) = \frac{\text{Area}(B_{\text{pred}} \cap B_{\text{gt}})}{\text{Area}(B_{\text{pred}} \cup B_{\text{gt}})} = \frac{\max(0, x_2^* - x_1^*) \cdot \max(0, y_2^* - y_1^*)}{\text{Area}_1 + \text{Area}_2 - \text{Area}_{\text{inter}}}$$
           </div>
           <p class="math-explanation">
             Computes the ratio of overlap between predicted bounding box $B_{\text{pred}} = (x_1^p, y_1^p, x_2^p, y_2^p)$ and ground-truth box $B_{\text{gt}} = (x_1^g, y_1^g, x_2^g, y_2^g)$, where intersection coordinates are given by:
