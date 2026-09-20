@@ -5,6 +5,7 @@ IMAGE-FIRST interface with VIDEO as secondary mode.
 Connects to the Flask backend API.
 """
 
+# pyrefly: ignore [missing-import]
 import streamlit as st
 import requests
 import tempfile
